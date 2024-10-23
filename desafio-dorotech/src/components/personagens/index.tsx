@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 
 
 export default function ListaPersonagens() {
-    //Armazenar lista de personagens
+    //Armazenar lista de personagens e quantidade de itens
     const [personagens, setPersonagens] = useState<Personagem[]>([])
     const [itens, setItens] = useState<number>(20)
 
