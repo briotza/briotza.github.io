@@ -2,7 +2,7 @@ import ListaPersonagens from "../components/personagens";
 
 export default function Home() {
     return(
-        <div>
+        <div className="bg-red-300 h-screen">
             <ListaPersonagens/>
         </div>
     )
