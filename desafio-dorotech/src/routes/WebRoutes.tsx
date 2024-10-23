@@ -1,5 +1,12 @@
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import Home from '../pages/home'
+
 export default function WebRoutes(){
     return(
-        <p>aaa</p>
+        <Router>
+            <Routes>
+                <Route path='/' element={<Home />} />
+            </Routes>
+        </Router>
     )
 }
