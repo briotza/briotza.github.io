@@ -7,6 +7,7 @@ import { Link } from "react-router-dom"
 export default function ListaPersonagens() {
     //Armazenar lista de personagens
     const [personagens, setPersonagens] = useState<Personagem[]>([])
+    const [itens, setItens] = useState<number>(20)
 
     const fetchPersonagens = async () => {
         try {
@@ -24,10 +25,19 @@ export default function ListaPersonagens() {
     useEffect(() => {
         fetchPersonagens()
     }, [])
+    
+    const handleItensPagina = (quant:number) => {
+        setItens(quant)
+    }
 
     return (
         <div>
             <h1 className="">Lista de Personagens</h1>
+            <select onChange={handleItensPagina} value={itens}>
+                <option>5</option>
+                <option>10</option>
+                <option>20</option>
+            </select>
             <ul>
                 {/* Listagem de personagens */}
                 {personagens.map(personagem => (
