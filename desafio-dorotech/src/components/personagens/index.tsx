@@ -4,11 +4,14 @@ import { Personagem } from "../../types/personagens.types"
 
 
 export default function ListaPersonagens() {
+    //Armazenar lista de personagens
     const [personagens, setPersonagens] = useState<Personagem[]>([])
 
     const fetchPersonagens = async () => {
         try {
+            //Requisição GET para a API
             const resposta = await axios.get('https://rickandmortyapi.com/api/character')
+            //Armazena resposta da API
             setPersonagens(resposta.data.results)
 
         } catch (error) {
@@ -16,6 +19,7 @@ export default function ListaPersonagens() {
         }
     }
 
+    //Chamada da função fetch
     useEffect(() => {
         fetchPersonagens()
      }, [])
@@ -24,6 +28,7 @@ export default function ListaPersonagens() {
         <div>
             <h1 className="">Lista de Personagens</h1>
             <ul>
+                {/* Listagem de personagens */}
                 {personagens.map(personagem => (
                     <li key={personagem.id}>
                         {personagem.id}
