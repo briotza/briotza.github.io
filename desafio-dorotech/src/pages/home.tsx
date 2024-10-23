@@ -1,5 +1,9 @@
+import ListaPersonagens from "../components/personagens";
+
 export default function Home() {
     return(
-        <p>Teste</p>
+        <div>
+            <ListaPersonagens/>
+        </div>
     )
 }
