@@ -26,21 +26,21 @@ export default function ListaPersonagens() {
         fetchPersonagens()
     }, [])
     
-    const handleItensPagina = (quant:number) => {
-        setItens(quant)
+    const handleItensPagina = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setItens(Number(event.target.value))
     }
 
     return (
         <div>
             <h1 className="">Lista de Personagens</h1>
             <select onChange={handleItensPagina} value={itens}>
-                <option>5</option>
-                <option>10</option>
-                <option>20</option>
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={20}>20</option>
             </select>
             <ul>
                 {/* Listagem de personagens */}
-                {personagens.map(personagem => (
+                {personagens.slice(0,itens).map(personagem => (
                     <li key={personagem.id}>
                         <Link to='/personagem'>
                             {personagem.id}
