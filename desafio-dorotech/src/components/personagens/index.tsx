@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 import { Personagem } from "../../types/personagens.types"
+import { Link } from "react-router-dom"
 
 
 export default function ListaPersonagens() {
@@ -22,7 +23,7 @@ export default function ListaPersonagens() {
     //Chamada da função fetch
     useEffect(() => {
         fetchPersonagens()
-     }, [])
+    }, [])
 
     return (
         <div>
@@ -31,8 +32,10 @@ export default function ListaPersonagens() {
                 {/* Listagem de personagens */}
                 {personagens.map(personagem => (
                     <li key={personagem.id}>
-                        {personagem.id}
-                        {personagem.name}
+                        <Link to='/personagem'>
+                            {personagem.id}
+                            {personagem.name}
+                        </Link>
                     </li>
                 ))}
             </ul>
