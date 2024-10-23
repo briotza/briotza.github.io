@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
+import { Personagem } from "../../types/personagens.types"
 
 
 export default function ListaPersonagens() {
-    const [personagens, setPersonagens] = useState([])
+    const [personagens, setPersonagens] = useState<Personagem[]>([])
 
     const fetchPersonagens = async () => {
         try {
