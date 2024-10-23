@@ -16,6 +16,16 @@ export default function ListaPersonagens() {
     }
 
     return (
-        <h1 className="">Lista de Personagens</h1>
+        <div>
+            <h1 className="">Lista de Personagens</h1>
+            <ul>
+                {personagens.map(personagem => (
+                    <li key={personagem.id}>
+                        {personagem.id}
+                        {personagem.name}
+                    </li>
+                ))}
+            </ul>
+        </div>
     )
 }
