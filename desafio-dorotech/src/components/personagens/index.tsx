@@ -26,6 +26,7 @@ export default function ListaPersonagens() {
         fetchPersonagens()
     }, [])
     
+    //Mudança de itens por página
     const handleItensPagina = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setItens(Number(event.target.value))
     }
@@ -33,6 +34,7 @@ export default function ListaPersonagens() {
     return (
         <div>
             <h1 className="">Lista de Personagens</h1>
+            {/* Lista de quantidade de itens */}
             <select onChange={handleItensPagina} value={itens}>
                 <option value={5}>5</option>
                 <option value={10}>10</option>
