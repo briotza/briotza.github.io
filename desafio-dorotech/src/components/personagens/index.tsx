@@ -16,6 +16,10 @@ export default function ListaPersonagens() {
         }
     }
 
+    useEffect(() => {
+        fetchPersonagens()
+     }, [])
+
     return (
         <div>
             <h1 className="">Lista de Personagens</h1>
