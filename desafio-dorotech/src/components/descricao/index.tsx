@@ -1,28 +1,42 @@
 import { useEffect, useState } from "react"
-import { Personagem } from "../../types/personagens.types"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 import { DescricaoPersonagem } from "../../types/descricao.types"
 
-export default function Descricao(){
+export default function Descricao() {
     const [personagem, setPersonagem] = useState<DescricaoPersonagem | null>(null)
-    const id = useParams<{id:string}>()
+    const { id } = useParams<{ id: string }>()
 
     useEffect(() => {
-        const fetchPersonagem = async() => {
-            const resposta = await axios.get(`ttps://rickandmortyapi.com/api/character/${id}`)
-            setPersonagem(resposta.data)
+        const fetchPersonagem = async () => {
+            try {
+                const resposta = await axios.get(`https://rickandmortyapi.com/api/character/${id}`)
+                setPersonagem(resposta.data)
+            } catch (error) {
+                console.error('Erro ao buscar o personagem:', error);
+            }
+
         }
 
         fetchPersonagem()
-    },[id])
+    }, [id])
 
-    return(
+    return (
         <div>
-        <p>Descrição do personagem</p>
-        <img src={personagem.image} />
-        {personagem.name}
-
+            <p>Descrição do personagem</p>
+            {personagem ? (
+                <>
+                    <img src={personagem.image} alt={personagem.name} />
+                    <h2>{personagem.name}</h2>
+                    <p>Status: {personagem.status}</p>
+                    <p>Espécie: {personagem.species}</p>
+                    <p>Gênero: {personagem.gender}</p>
+                    <p>Origem: {personagem.origin.name}</p>
+                    <p>Localização: {personagem.location.name}</p>
+                </>
+            ) : (
+                <p>Carregando personagem...</p>
+            )}
         </div>
 
     )

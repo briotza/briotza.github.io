@@ -7,7 +7,7 @@ export default function WebRoutes(){
         <Router>
             <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='/personagem' element={<Descricao />} />
+                <Route path='/personagem/:id' element={<Descricao />} />
             </Routes>
         </Router>
     )

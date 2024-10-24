@@ -76,7 +76,7 @@ export default function ListaPersonagens() {
                 {/* Listagem de personagens */}
                 {exibidos.map(personagem => (
                     <li key={personagem.id}>
-                        <Link to='/personagem'>
+                        <Link to={`/personagem/${personagem.id}`}>
                             {personagem.id} - 
                             {personagem.name} - 
                             {personagem.status}
