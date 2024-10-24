@@ -9,6 +9,7 @@ export default function ListaPersonagens() {
     const [personagens, setPersonagens] = useState<Personagem[]>([])
     const [itens, setItens] = useState<number>(20)
     const [totalPersonagens, setTotalPersonagens] = useState<number>(0)
+    const [pagina, setPagina] = useState<number>(1)
 
     const fetchPersonagens = async () => {
         try {
@@ -29,6 +30,7 @@ export default function ListaPersonagens() {
                 }
             }
             setPersonagens(todos)
+            setTotalPersonagens(todos.length)
 
         } catch (error) {
             console.log('Não foi possível carregar a lista:'), error
@@ -45,6 +47,10 @@ export default function ListaPersonagens() {
         setItens(Number(event.target.value))
     }
 
+    const inicio = (pagina-1) * itens
+    const fim = inicio + itens
+    const exibidos = personagens.slice(inicio,fim)
+
     return (
         <div>
             <h1 className="">Lista de Personagens</h1>
@@ -56,7 +62,7 @@ export default function ListaPersonagens() {
             </select>
             <ul>
                 {/* Listagem de personagens */}
-                {personagens.map(personagem => (
+                {exibidos.map(personagem => (
                     <li key={personagem.id}>
                         <Link to='/personagem'>
                             {personagem.id}
@@ -65,6 +71,12 @@ export default function ListaPersonagens() {
                     </li>
                 ))}
             </ul>
+            <button>
+                Anterior
+            </button>
+            <button>
+                Próximo
+            </button>
         </div>
     )
 }
