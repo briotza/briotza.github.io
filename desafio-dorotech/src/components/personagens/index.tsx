@@ -15,11 +15,12 @@ export default function ListaPersonagens() {
     const [pagina, setPagina] = useState<number>(1)
 
     //Armazenar filtros
-    const [filtroGenero, setfiltroGenero] = useState<string>()
-    const [filtroStatus, setfiltroStatus] = useState<string>()
-    const [filtroEspecie, setfiltroEspecie] = useState<string>()
+    const [filtroGenero, setFiltroGenero] = useState<string>('')
+    const [filtroStatus, setFiltroStatus] = useState<string>('')
+    const [filtroEspecie, setFiltroEspecie] = useState<string>('')
 
 
+    
     const fetchPersonagens = async () => {
         try {
             const todos = []
@@ -56,14 +57,26 @@ export default function ListaPersonagens() {
         setPagina(1)
     }
 
+    const filtrarPersonagens = () => {
+        return personagens.filter(personagem => {
+            const generoMatch = filtroGenero ? personagem.gender === filtroGenero : true;
+            const statusMatch = filtroStatus ? personagem.status === filtroStatus : true;
+            const especieMatch = filtroEspecie ? personagem.species === filtroEspecie : true;
+            return generoMatch && statusMatch && especieMatch;
+        });
+    }
+
+    const personagensFiltrados = filtrarPersonagens();
+
+
     //Lógica para exibição de personagens
     const inicio = (pagina-1) * itens
     const fim = inicio + itens
-    const exibidos = personagens.slice(inicio,fim)
+    const exibidos = personagensFiltrados.slice(inicio,fim)
 
     //Botões de navegação de página
     const proximo = () => {
-        if(pagina < Math.ceil(totalPersonagens/itens)){
+        if(pagina < Math.ceil(personagensFiltrados.length/itens)){
             setPagina(pagina+1)
         }
     }
@@ -73,9 +86,34 @@ export default function ListaPersonagens() {
         }
     }
 
+    
+
     return (
         <div>
             <h1 className="">Lista de Personagens</h1>
+
+            <label>Filtro de Gênero:</label>
+                <select onChange={(e) => setFiltroGenero(e.target.value)} value={filtroGenero}>
+                    <option value="">Todos</option>
+                    {opcoesGenero.map(genero => (
+                        <option key={genero} value={genero}>{genero}</option>
+                    ))}
+                </select>
+                <label>Filtro de Status:</label>
+                <select onChange={(e) => setFiltroStatus(e.target.value)} value={filtroStatus}>
+                    <option value="">Todos</option>
+                    {opcoesStatus.map(status => (
+                        <option key={status} value={status}>{status}</option>
+                    ))}
+                </select>
+
+                <label>Filtro de Espécie:</label>
+                <select onChange={(e) => setFiltroEspecie(e.target.value)} value={filtroEspecie}>
+                    <option value="">Todos</option>
+                    {opcoesEspecie.map(especie => (
+                        <option key={especie} value={especie}>{especie}</option>
+                    ))}
+                </select>
             {/* Lista de quantidade de itens */}
             <select onChange={handleItensPagina} value={itens}>
                 <option value={5}>5</option>
