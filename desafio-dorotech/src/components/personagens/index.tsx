@@ -131,14 +131,18 @@ export default function ListaPersonagens() {
             </select>
 
             {/* Listagem de personagens */}
-            <ul className="grid grid-cols-4">
+            <ul className="grid grid-cols-4 gap-3 mt-3">
                 {exibidos.map(personagem => (
-                    <li key={personagem.id}>
-                        <Link to={`/personagem/${personagem.id}`}>
-                            {personagem.id} -
-                            {personagem.name} -
-                            {personagem.status}
-                            <img src={personagem.image} className="w-20" />
+                    <li key={personagem.id} className="p-2 bg-white rounded-xl">
+                        <Link to={`/personagem/${personagem.id}`} className="flex flex-row gap-2">
+                        <img src={personagem.image} className="w-20" />
+                        <div className="flex flex-col">
+                            <p>{personagem.id}</p>
+                            <p>{personagem.name}</p>
+                            <p>{personagem.status}</p>
+                            
+                        </div>
+
                         </Link>
                     </li>
                 ))}
