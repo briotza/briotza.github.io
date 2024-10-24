@@ -3,6 +3,7 @@ import axios from "axios"
 import { Personagem } from "../../types/personagens.types"
 import { Link } from "react-router-dom"
 
+//Categorias
 const opcoesGenero = ['Male', 'Female', 'Genderless', 'Unknown']
 const opcoesStatus = ['Alive', 'Dead', 'Unknown']
 const opcoesEspecie = ['Human', 'Alien', 'Robot', 'Unknown', 'Other']
@@ -57,6 +58,7 @@ export default function ListaPersonagens() {
         setPagina(1)
     }
 
+    //Lógica de filtragem
     const filtrarPersonagens = () => {
         return personagens.filter(personagem => {
             const generoMatch = filtroGenero ? personagem.gender === filtroGenero : true
@@ -93,8 +95,10 @@ export default function ListaPersonagens() {
         <div>
             <h1 className="">Lista de Personagens</h1>
 
+            {/* Filtro de nome */}
             <input type="text" value={filtroNome} onChange={(e) => setFiltroNome(e.target.value)} className="w-[300px]" placeholder="Digite o nome do personagem" />
 
+            {/* Filtro de gênero */}
             <label>Filtro de Gênero:</label>
             <select onChange={(e) => setFiltroGenero(e.target.value)} value={filtroGenero}>
                 <option value="">Todos</option>
@@ -102,7 +106,8 @@ export default function ListaPersonagens() {
                     <option key={genero} value={genero}>{genero}</option>
                 ))}
             </select>
-
+            
+            {/* Filtro de status */}
             <label>Filtro de Status:</label>
             <select onChange={(e) => setFiltroStatus(e.target.value)} value={filtroStatus}>
                 <option value="">Todos</option>
@@ -110,7 +115,8 @@ export default function ListaPersonagens() {
                     <option key={status} value={status}>{status}</option>
                 ))}
             </select>
-
+            
+            {/* Filtro de espécie */}
             <label>Filtro de Espécie:</label>
             <select onChange={(e) => setFiltroEspecie(e.target.value)} value={filtroEspecie}>
                 <option value="">Todos</option>
