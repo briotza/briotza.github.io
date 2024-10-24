@@ -62,7 +62,6 @@ export default function ListaPersonagens() {
             setPagina(pagina-1)
         }
     }
-    
 
     return (
         <div>
