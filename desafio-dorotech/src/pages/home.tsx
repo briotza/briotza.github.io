@@ -1,15 +1,16 @@
 import ListaPersonagens from "../components/personagens";
 import logo from '../assets/logo.png'
-import banner from '../assets/banner.webp'
+import portal from '../assets/portal.png'
 
 export default function Home() {
     return (
-        <div className="h-screen flex flex-col items-center">
-            <div className="flex flex-col bg-black w-screen items-center h-[119px]">
-                <img src={banner} className="max-w-[700px] absolute" />
+        <div className="h-full flex flex-col bg-custom-image bg-cover bg-center items-center">
+            <div className="flex flex-row w-screen items-center p-3">
+                <img src={logo} className="max-w-[300px]" />
             </div>
-            <h1 className="mt-5 font-creepster text-[#12ABC9] text-4xl text-outline mb-5">Lista de Personagens</h1>
+            <h1 className=" font-creepster text-[#12ABC9] text-3xl text-outline mb-5">Lista de Personagens</h1>
             <ListaPersonagens />
+            <img src={portal} className="w-[1000px]" />
         </div>
     )
 }

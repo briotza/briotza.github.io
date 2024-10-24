@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'custom-image': "url('./src/assets/bg.jpg')"
+      },
       fontFamily: {
         creepster: ['Creepster', 'cursive'],
       },
