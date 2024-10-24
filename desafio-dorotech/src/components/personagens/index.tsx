@@ -8,13 +8,27 @@ export default function ListaPersonagens() {
     //Armazenar lista de personagens e quantidade de itens
     const [personagens, setPersonagens] = useState<Personagem[]>([])
     const [itens, setItens] = useState<number>(20)
+    const [totalPersonagens, setTotalPersonagens] = useState<number>(0)
 
     const fetchPersonagens = async () => {
         try {
-            //Requisição GET para a API
-            const resposta = await axios.get('https://rickandmortyapi.com/api/character')
-            //Armazena resposta da API
-            setPersonagens(resposta.data.results)
+            const todos = []
+            let pagina = 1
+            let continuar = true
+            while (continuar) {
+                //Requisição GET para a API
+                const resposta = await axios.get(`https://rickandmortyapi.com/api/character?page=${pagina}`)
+                //Armazena resposta da API
+                //setPersonagens(resposta.data.results)
+                todos.push(...resposta.data.results);
+
+                if (resposta.data.info.next) {
+                    pagina++
+                } else {
+                    continuar = false
+                }
+            }
+            setPersonagens(todos)
 
         } catch (error) {
             console.log('Não foi possível carregar a lista:'), error
@@ -25,7 +39,7 @@ export default function ListaPersonagens() {
     useEffect(() => {
         fetchPersonagens()
     }, [])
-    
+
     //Mudança de itens por página
     const handleItensPagina = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setItens(Number(event.target.value))
@@ -42,7 +56,7 @@ export default function ListaPersonagens() {
             </select>
             <ul>
                 {/* Listagem de personagens */}
-                {personagens.slice(0,itens).map(personagem => (
+                {personagens.map(personagem => (
                     <li key={personagem.id}>
                         <Link to='/personagem'>
                             {personagem.id}
