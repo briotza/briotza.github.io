@@ -23,7 +23,6 @@ export default function Descricao() {
 
     return (
         <div>
-            <p>Descrição do personagem</p>
             {personagem ? (
                 <>
                     <img src={personagem.image} alt={personagem.name} />
