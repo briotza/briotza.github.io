@@ -45,6 +45,7 @@ export default function ListaPersonagens() {
     //Mudança de itens por página
     const handleItensPagina = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setItens(Number(event.target.value))
+        setPagina(1)
     }
 
     const inicio = (pagina-1) * itens
@@ -54,6 +55,11 @@ export default function ListaPersonagens() {
     const proximo = () => {
         if(pagina < Math.ceil(totalPersonagens/itens)){
             setPagina(pagina+1)
+        }
+    }
+    const anterior = () => {
+        if(pagina > 1){
+            setPagina(pagina-1)
         }
     }
     
@@ -78,10 +84,10 @@ export default function ListaPersonagens() {
                     </li>
                 ))}
             </ul>
-            <button onClick={proximo}>
+            <button onClick={anterior}>
                 Anterior
             </button>
-            <button>
+            <button onClick={proximo}>
                 Próximo
             </button>
         </div>
