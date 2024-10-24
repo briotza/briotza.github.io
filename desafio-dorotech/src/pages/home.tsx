@@ -1,6 +1,6 @@
 import ListaPersonagens from "../components/personagens";
 import logo from '../assets/logo.png'
-import portal from '../assets/portal.png'
+import portal from '../assets/green-portal.png'
 
 export default function Home() {
     return (
@@ -10,7 +10,7 @@ export default function Home() {
             </div>
             <h1 className=" font-creepster text-[#12ABC9] text-3xl text-outline mb-5">Lista de Personagens</h1>
             <ListaPersonagens />
-            <img src={portal} className="w-[1000px]" />
+            <img src={portal} className="w-[800px]" />
         </div>
     )
 }
