@@ -51,11 +51,12 @@ export default function ListaPersonagens() {
     const fim = inicio + itens
     const exibidos = personagens.slice(inicio,fim)
 
-    const anterior = () => {
+    const proximo = () => {
         if(pagina < Math.ceil(totalPersonagens/itens)){
             setPagina(pagina+1)
         }
     }
+    
 
     return (
         <div>
@@ -77,7 +78,7 @@ export default function ListaPersonagens() {
                     </li>
                 ))}
             </ul>
-            <button onClick={anterior}>
+            <button onClick={proximo}>
                 Anterior
             </button>
             <button>
