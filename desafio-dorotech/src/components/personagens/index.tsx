@@ -3,12 +3,22 @@ import axios from "axios"
 import { Personagem } from "../../types/personagens.types"
 import { Link } from "react-router-dom"
 
+const opcoesGenero = ['Male', 'Female', 'Genderless', 'Unknown']
+const opcoesStatus = ['Alive', 'Dead', 'Unknown']
+const opcoesEspecie = ['Human', 'Alien', 'Robot', 'Unknown', 'Other']
+
 export default function ListaPersonagens() {
     //Armazenar lista de personagens, quantidade de itens, total de personagens e páginas
     const [personagens, setPersonagens] = useState<Personagem[]>([])
     const [itens, setItens] = useState<number>(20)
     const [totalPersonagens, setTotalPersonagens] = useState<number>(0)
     const [pagina, setPagina] = useState<number>(1)
+
+    //Armazenar filtros
+    const [filtroGenero, setfiltroGenero] = useState<string>()
+    const [filtroStatus, setfiltroStatus] = useState<string>()
+    const [filtroEspecie, setfiltroEspecie] = useState<string>()
+
 
     const fetchPersonagens = async () => {
         try {
