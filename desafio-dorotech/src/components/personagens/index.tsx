@@ -51,6 +51,12 @@ export default function ListaPersonagens() {
     const fim = inicio + itens
     const exibidos = personagens.slice(inicio,fim)
 
+    const anterior = () => {
+        if(pagina < Math.ceil(totalPersonagens/itens)){
+            setPagina(pagina+1)
+        }
+    }
+
     return (
         <div>
             <h1 className="">Lista de Personagens</h1>
@@ -71,7 +77,7 @@ export default function ListaPersonagens() {
                     </li>
                 ))}
             </ul>
-            <button>
+            <button onClick={anterior}>
                 Anterior
             </button>
             <button>
