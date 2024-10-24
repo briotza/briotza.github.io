@@ -3,9 +3,8 @@ import axios from "axios"
 import { Personagem } from "../../types/personagens.types"
 import { Link } from "react-router-dom"
 
-
 export default function ListaPersonagens() {
-    //Armazenar lista de personagens e quantidade de itens
+    //Armazenar lista de personagens, quantidade de itens, total de personagens e páginas
     const [personagens, setPersonagens] = useState<Personagem[]>([])
     const [itens, setItens] = useState<number>(20)
     const [totalPersonagens, setTotalPersonagens] = useState<number>(0)
@@ -20,9 +19,8 @@ export default function ListaPersonagens() {
                 //Requisição GET para a API
                 const resposta = await axios.get(`https://rickandmortyapi.com/api/character?page=${pagina}`)
                 //Armazena resposta da API
-                //setPersonagens(resposta.data.results)
                 todos.push(...resposta.data.results);
-
+                //Condição para carregar todos os personagens
                 if (resposta.data.info.next) {
                     pagina++
                 } else {
@@ -48,10 +46,12 @@ export default function ListaPersonagens() {
         setPagina(1)
     }
 
+    //Lógica para exibição de personagens
     const inicio = (pagina-1) * itens
     const fim = inicio + itens
     const exibidos = personagens.slice(inicio,fim)
 
+    //Botões de navegação de página
     const proximo = () => {
         if(pagina < Math.ceil(totalPersonagens/itens)){
             setPagina(pagina+1)
@@ -84,6 +84,7 @@ export default function ListaPersonagens() {
                     </li>
                 ))}
             </ul>
+            {/* Navegação entre páginas */}
             <button onClick={anterior}>
                 Anterior
             </button>
