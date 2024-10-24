@@ -78,8 +78,10 @@ export default function ListaPersonagens() {
                 {exibidos.map(personagem => (
                     <li key={personagem.id}>
                         <Link to='/personagem'>
-                            {personagem.id}
-                            {personagem.name}
+                            {personagem.id} - 
+                            {personagem.name} - 
+                            {personagem.status}
+                            <img src={personagem.image} className="w-20" />
                         </Link>
                     </li>
                 ))}
