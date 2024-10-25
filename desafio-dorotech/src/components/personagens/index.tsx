@@ -2,7 +2,8 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import { Personagem } from "../../types/personagens.types"
 import { Link } from "react-router-dom"
-import filtro from '../../assets/filtro.png'
+import heart from '../../assets/heart.png'
+import skull from '../../assets/skull.png'
 
 //Categorias
 const opcoesGenero = ['Male', 'Female', 'Genderless', 'unknown']
@@ -158,9 +159,19 @@ export default function ListaPersonagens() {
                         <Link to={`/personagem/${personagem.id}`} className="flex flex-row gap-2">
                             <img src={personagem.image} className="w-20" />
                             <div className="flex flex-col">
-                                <p>{personagem.name}</p>
-                                <p>{personagem.status}</p>
-
+                                <div className="flex">
+                                    <p>{personagem.name}</p>
+                                </div>
+                                <div className="flex items-center">
+                                    {personagem.status === 'Alive' ? (
+                                        <img src={heart} alt="Alive" className="h-4 mr-1" />
+                                    ) : personagem.status === 'Dead' ? (
+                                        <img src={skull} alt="Dead"  className="h-4 mr-1"/>
+                                    ) : (
+                                        <p>a</p>
+                                    )}
+                                    <p>{personagem.status}</p>
+                                </div>
                             </div>
 
                         </Link>
