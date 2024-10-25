@@ -14,6 +14,7 @@ export default function ListaPersonagens() {
     const [itens, setItens] = useState<number>(20)
     const [totalPersonagens, setTotalPersonagens] = useState<number>(0)
     const [pagina, setPagina] = useState<number>(1)
+    const [visivel, setVisivel] = useState<boolean>(false)
 
     //Armazenar filtros
     const [filtroGenero, setFiltroGenero] = useState<string>('')
@@ -89,39 +90,47 @@ export default function ListaPersonagens() {
         }
     }
 
-
+    const alternaVisibilidade = () => {
+        setVisivel((prev) => !prev)
+    }
 
     return (
         <div className="h-[830px]">
             {/* Filtro de nome */}
             <input type="text" value={filtroNome} onChange={(e) => setFiltroNome(e.target.value)} className="w-[300px] p-3 rounded-xl" placeholder="Digite o nome do personagem" />
+            <button className="bg-white" onClick={alternaVisibilidade}>{visivel ? 'Ocultar' : 'Mostrar'}</button>
+            {visivel && (
+                <div>
+                    {/* Filtro de gênero */}
+                    <label>Filtro de Gênero:</label>
+                    <select onChange={(e) => setFiltroGenero(e.target.value)} value={filtroGenero}>
+                        <option value="">Todos</option>
+                        {opcoesGenero.map(genero => (
+                            <option key={genero} value={genero}>{genero}</option>
+                        ))}
+                    </select>
 
-            {/* Filtro de gênero */}
-            <label>Filtro de Gênero:</label>
-            <select onChange={(e) => setFiltroGenero(e.target.value)} value={filtroGenero}>
-                <option value="">Todos</option>
-                {opcoesGenero.map(genero => (
-                    <option key={genero} value={genero}>{genero}</option>
-                ))}
-            </select>
+                    {/* Filtro de status */}
+                    <label>Filtro de Status:</label>
+                    <select onChange={(e) => setFiltroStatus(e.target.value)} value={filtroStatus}>
+                        <option value="">Todos</option>
+                        {opcoesStatus.map(status => (
+                            <option key={status} value={status}>{status}</option>
+                        ))}
+                    </select>
 
-            {/* Filtro de status */}
-            <label>Filtro de Status:</label>
-            <select onChange={(e) => setFiltroStatus(e.target.value)} value={filtroStatus}>
-                <option value="">Todos</option>
-                {opcoesStatus.map(status => (
-                    <option key={status} value={status}>{status}</option>
-                ))}
-            </select>
-            
-            {/* Filtro de espécie */}
-            <label>Filtro de Espécie:</label>
-            <select onChange={(e) => setFiltroEspecie(e.target.value)} value={filtroEspecie}>
-                <option value="">Todos</option>
-                {opcoesEspecie.map(especie => (
-                    <option key={especie} value={especie}>{especie}</option>
-                ))}
-            </select>
+                    {/* Filtro de espécie */}
+                    <label>Filtro de Espécie:</label>
+                    <select onChange={(e) => setFiltroEspecie(e.target.value)} value={filtroEspecie}>
+                        <option value="">Todos</option>
+                        {opcoesEspecie.map(especie => (
+                            <option key={especie} value={especie}>{especie}</option>
+                        ))}
+                    </select>
+                </div>
+
+            )}
+
 
             {/* Lista de quantidade de itens */}
             <select onChange={handleItensPagina} value={itens}>
@@ -135,13 +144,13 @@ export default function ListaPersonagens() {
                 {exibidos.map(personagem => (
                     <li key={personagem.id} className="p-2 bg-white rounded-xl">
                         <Link to={`/personagem/${personagem.id}`} className="flex flex-row gap-2">
-                        <img src={personagem.image} className="w-20" />
-                        <div className="flex flex-col">
-                            <p>{personagem.id}</p>
-                            <p>{personagem.name}</p>
-                            <p>{personagem.status}</p>
-                            
-                        </div>
+                            <img src={personagem.image} className="w-20" />
+                            <div className="flex flex-col">
+                                <p>{personagem.id}</p>
+                                <p>{personagem.name}</p>
+                                <p>{personagem.status}</p>
+
+                            </div>
 
                         </Link>
                     </li>
