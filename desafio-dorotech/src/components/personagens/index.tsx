@@ -98,7 +98,7 @@ export default function ListaPersonagens() {
     }
 
     return (
-        <div className="h-[950px] font-sans text-white w-[977px] pt-6">
+        <div className="h-[100%] font-sans text-white w-[977px] pt-6">
             {/* Filtro de nome */}
             <div className="flex items-center bg-[#913E86] p-3 rounded-t-xl bg-opacity-60">
                 <input type="text" value={filtroNome} onChange={(e) => setFiltroNome(e.target.value)} className="w-[700px] p-3 rounded-xl text-black" placeholder="Digite o nome do personagem" />
@@ -160,9 +160,7 @@ export default function ListaPersonagens() {
                         <Link to={`/personagem/${personagem.id}`} className="flex flex-row gap-2">
                             <img src={personagem.image} className="w-20" />
                             <div className="flex flex-col">
-                                <div className="flex">
-                                    <p>{personagem.name}</p>
-                                </div>
+                                    <p className="font-bold">{personagem.name}</p>
                                 <div className="flex items-center">
                                     {personagem.status === 'Alive' ? (
                                         <img src={heart} alt="Alive" className="h-4 mr-1" />
@@ -181,7 +179,7 @@ export default function ListaPersonagens() {
             </ul>
 
             {/* Navegação entre páginas */}
-            <div className="flex">
+            <div className="flex mt-2">
                 <div className="flex flex-row ml-auto space-x-4 text-[#8EDC23] font-bold">
                     <button onClick={anterior}>
                         Anterior
