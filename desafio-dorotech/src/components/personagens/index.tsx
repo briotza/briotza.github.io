@@ -92,9 +92,9 @@ export default function ListaPersonagens() {
 
 
     return (
-        <div className="h-[1100px]">
+        <div className="h-[830px]">
             {/* Filtro de nome */}
-            <input type="text" value={filtroNome} onChange={(e) => setFiltroNome(e.target.value)} className="w-[300px]" placeholder="Digite o nome do personagem" />
+            <input type="text" value={filtroNome} onChange={(e) => setFiltroNome(e.target.value)} className="w-[300px] p-3 rounded-xl" placeholder="Digite o nome do personagem" />
 
             {/* Filtro de gênero */}
             <label>Filtro de Gênero:</label>
@@ -131,7 +131,7 @@ export default function ListaPersonagens() {
             </select>
 
             {/* Listagem de personagens */}
-            <ul className="grid grid-cols-2 gap-3 mt-3">
+            <ul className="grid grid-cols-3 gap-3 mt-3">
                 {exibidos.map(personagem => (
                     <li key={personagem.id} className="p-2 bg-white rounded-xl">
                         <Link to={`/personagem/${personagem.id}`} className="flex flex-row gap-2">
