@@ -96,12 +96,12 @@ export default function ListaPersonagens() {
     }
 
     return (
-        <div className="h-[900px] font-inter text-white w-[977px]">
+        <div className="h-[950px] font-sans text-white w-[977px] pt-6">
             {/* Filtro de nome */}
-            <div className="flex items-center bg-[#913E86] p-3 rounded-xl">
+            <div className="flex items-center bg-[#913E86] p-3 rounded-t-xl bg-opacity-60">
                 <input type="text" value={filtroNome} onChange={(e) => setFiltroNome(e.target.value)} className="w-[700px] p-3 rounded-xl" placeholder="Digite o nome do personagem" />
                 <div className="flex flex-row ml-auto gap-3">
-                    <button className="bg-[#913E86]" onClick={alternaVisibilidade}>{visivel ? 'Filtros' : 'Filtros'}</button>
+                    <button className="bg-none" onClick={alternaVisibilidade}>{visivel ? 'Filtros' : 'Filtros'}</button>
                     <div className="">
                         {/* Lista de quantidade de itens */}
                         <select onChange={handleItensPagina} value={itens} className="bg-[#913E86]">
@@ -115,11 +115,11 @@ export default function ListaPersonagens() {
 
 
             {visivel && (
-                <div className="py-3 flex gap-3 bg-[#913E86]">
+                <div className="py-3 flex gap-6 bg-[#913E86] bg-opacity-60 justify-center">
                     {/* Filtro de gênero */}
-                    <div className="bg-[#160440]">
-                        <label>Filtro de Gênero:</label>
-                        <select onChange={(e) => setFiltroGenero(e.target.value)} value={filtroGenero} className="bg-[#913E86]">
+                    <div className="bg-[#913E86] bg-opacity-60">
+                        <label className="p-3">Filtro de Gênero:</label>
+                        <select onChange={(e) => setFiltroGenero(e.target.value)} value={filtroGenero} className="bg-[#913E86] p-2">
                             <option value="">Todos</option>
                             {opcoesGenero.map(genero => (
                                 <option key={genero} value={genero}>{genero}</option>
@@ -127,10 +127,10 @@ export default function ListaPersonagens() {
                         </select>
                     </div>
 
-                    <div className="bg-[#160440]">
+                    <div className="bg-[#913E86] bg-opacity-60">
                         {/* Filtro de status */}
-                        <label>Filtro de Status:</label>
-                        <select onChange={(e) => setFiltroStatus(e.target.value)} value={filtroStatus} className="bg-[#913E86]">
+                        <label className="p-3">Filtro de Status:</label>
+                        <select onChange={(e) => setFiltroStatus(e.target.value)} value={filtroStatus} className="bg-[#913E86] p-2">
                             <option value="">Todos</option>
                             {opcoesStatus.map(status => (
                                 <option key={status} value={status}>{status}</option>
@@ -138,10 +138,10 @@ export default function ListaPersonagens() {
                         </select>
                     </div>
 
-                    <div className="bg-[#160440]">
+                    <div className="bg-[#913E86] bg-opacity-60">
                         {/* Filtro de espécie */}
-                        <label>Filtro de Espécie:</label>
-                        <select onChange={(e) => setFiltroEspecie(e.target.value)} value={filtroEspecie} className="bg-[#160440]">
+                        <label className="p-3">Filtro de Espécie:</label>
+                        <select onChange={(e) => setFiltroEspecie(e.target.value)} value={filtroEspecie} className="bg-[#913E86] p-2">
                             <option value="">Todos</option>
                             {opcoesEspecie.map(especie => (
                                 <option key={especie} value={especie}>{especie}</option>
@@ -152,9 +152,9 @@ export default function ListaPersonagens() {
             )}
 
             {/* Listagem de personagens */}
-            <ul className="grid grid-cols-3 gap-3 pt-3 bg-[#EEE419] rounded-xl p-3">
+            <ul className="grid grid-cols-3 gap-3 pt-3 bg-[#62A3AB] rounded-b-xl p-3 bg-opacity-60">
                 {exibidos.map(personagem => (
-                    <li key={personagem.id} className="p-2 bg-[#160440] rounded-xl text-white">
+                    <li key={personagem.id} className="p-2 bg-[#24325f] rounded-xl text-white">
                         <Link to={`/personagem/${personagem.id}`} className="flex flex-row gap-2">
                             <img src={personagem.image} className="w-20" />
                             <div className="flex flex-col">
@@ -169,12 +169,17 @@ export default function ListaPersonagens() {
             </ul>
 
             {/* Navegação entre páginas */}
-            <button onClick={anterior}>
-                Anterior
-            </button>
-            <button onClick={proximo}>
-                Próximo
-            </button>
+            <div className="flex">
+                <div className="flex flex-row ml-auto space-x-4 text-[#8EDC23] font-bold">
+                    <button onClick={anterior}>
+                        Anterior
+                    </button>
+                    <p>{pagina}</p>
+                    <button onClick={proximo}>
+                        Próximo
+                    </button>
+                </div>
+            </div>
         </div>
     )
 }
