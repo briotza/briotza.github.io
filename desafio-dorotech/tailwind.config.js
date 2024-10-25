@@ -11,6 +11,7 @@ export default {
       },
       fontFamily: {
         creepster: ['Creepster', 'cursive'],
+        inter: ['Inter', 'sans-serif']
       },
     },
   },
