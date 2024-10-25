@@ -8,9 +8,9 @@ export default function Home() {
     return (
         <div className="h-full flex flex-col bg-custom-image bg-cover bg-center items-center">
             <div className="flex flex-row w-screen items-center justify-center gap-4 h-[160px]">
-                <img src={rick} className="max-h-[130px] left-0 ml-4 mt-4" />
+                <img src={rick} className="max-h-[125px] left-0 ml-4 mt-4" />
                 <h1 className=" font-creepster text-[#12ABC9] text-4xl text-outline mb-5">Lista de Personagens</h1>
-                <img src={morty} className="max-h-[130px] right-0 mr-4 mt-4" />
+                <img src={morty} className="max-h-[125px] right-0 mr-4 mt-4" />
             </div>
 
             <ListaPersonagens />
