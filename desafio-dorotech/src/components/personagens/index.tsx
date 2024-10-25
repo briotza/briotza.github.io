@@ -99,7 +99,7 @@ export default function ListaPersonagens() {
         <div className="h-[950px] font-sans text-white w-[977px] pt-6">
             {/* Filtro de nome */}
             <div className="flex items-center bg-[#913E86] p-3 rounded-t-xl bg-opacity-60">
-                <input type="text" value={filtroNome} onChange={(e) => setFiltroNome(e.target.value)} className="w-[700px] p-3 rounded-xl" placeholder="Digite o nome do personagem" />
+                <input type="text" value={filtroNome} onChange={(e) => setFiltroNome(e.target.value)} className="w-[700px] p-3 rounded-xl text-black" placeholder="Digite o nome do personagem" />
                 <div className="flex flex-row ml-auto gap-3">
                     <button className="bg-none" onClick={alternaVisibilidade}>{visivel ? 'Filtros' : 'Filtros'}</button>
                     <div className="">
