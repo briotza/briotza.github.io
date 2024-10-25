@@ -2,11 +2,12 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import { Personagem } from "../../types/personagens.types"
 import { Link } from "react-router-dom"
+import filtro from '../../assets/filtro.png'
 
 //Categorias
-const opcoesGenero = ['Male', 'Female', 'Genderless', 'Unknown']
-const opcoesStatus = ['Alive', 'Dead', 'Unknown']
-const opcoesEspecie = ['Human', 'Alien', 'Robot', 'Unknown', 'Other']
+const opcoesGenero = ['Male', 'Female', 'Genderless', 'unknown']
+const opcoesStatus = ['Alive', 'Dead', 'unknown']
+const opcoesEspecie = ['Human', 'Alien', 'Robot', 'unknown', 'Other']
 
 export default function ListaPersonagens() {
     //Armazenar lista de personagens, quantidade de itens, total de personagens e páginas
@@ -95,58 +96,68 @@ export default function ListaPersonagens() {
     }
 
     return (
-        <div className="h-[830px]">
+        <div className="h-[900px] font-inter text-white w-[977px]">
             {/* Filtro de nome */}
-            <input type="text" value={filtroNome} onChange={(e) => setFiltroNome(e.target.value)} className="w-[300px] p-3 rounded-xl" placeholder="Digite o nome do personagem" />
-            <button className="bg-white" onClick={alternaVisibilidade}>{visivel ? 'Ocultar' : 'Mostrar'}</button>
-            {visivel && (
-                <div>
-                    {/* Filtro de gênero */}
-                    <label>Filtro de Gênero:</label>
-                    <select onChange={(e) => setFiltroGenero(e.target.value)} value={filtroGenero}>
-                        <option value="">Todos</option>
-                        {opcoesGenero.map(genero => (
-                            <option key={genero} value={genero}>{genero}</option>
-                        ))}
-                    </select>
-
-                    {/* Filtro de status */}
-                    <label>Filtro de Status:</label>
-                    <select onChange={(e) => setFiltroStatus(e.target.value)} value={filtroStatus}>
-                        <option value="">Todos</option>
-                        {opcoesStatus.map(status => (
-                            <option key={status} value={status}>{status}</option>
-                        ))}
-                    </select>
-
-                    {/* Filtro de espécie */}
-                    <label>Filtro de Espécie:</label>
-                    <select onChange={(e) => setFiltroEspecie(e.target.value)} value={filtroEspecie}>
-                        <option value="">Todos</option>
-                        {opcoesEspecie.map(especie => (
-                            <option key={especie} value={especie}>{especie}</option>
-                        ))}
-                    </select>
+            <div className="flex items-center bg-[#913E86] p-3 rounded-xl">
+                <input type="text" value={filtroNome} onChange={(e) => setFiltroNome(e.target.value)} className="w-[700px] p-3 rounded-xl" placeholder="Digite o nome do personagem" />
+                <div className="flex flex-row ml-auto gap-3">
+                    <button className="bg-[#913E86]" onClick={alternaVisibilidade}>{visivel ? 'Filtros' : 'Filtros'}</button>
+                    <div className="">
+                        {/* Lista de quantidade de itens */}
+                        <select onChange={handleItensPagina} value={itens} className="bg-[#913E86]">
+                            <option value={5}>5</option>
+                            <option value={10}>10</option>
+                            <option value={20}>20</option>
+                        </select>
+                    </div>
                 </div>
+            </div>
 
+
+            {visivel && (
+                <div className="py-3 flex gap-3 bg-[#913E86]">
+                    {/* Filtro de gênero */}
+                    <div className="bg-[#160440]">
+                        <label>Filtro de Gênero:</label>
+                        <select onChange={(e) => setFiltroGenero(e.target.value)} value={filtroGenero} className="bg-[#913E86]">
+                            <option value="">Todos</option>
+                            {opcoesGenero.map(genero => (
+                                <option key={genero} value={genero}>{genero}</option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div className="bg-[#160440]">
+                        {/* Filtro de status */}
+                        <label>Filtro de Status:</label>
+                        <select onChange={(e) => setFiltroStatus(e.target.value)} value={filtroStatus} className="bg-[#913E86]">
+                            <option value="">Todos</option>
+                            {opcoesStatus.map(status => (
+                                <option key={status} value={status}>{status}</option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div className="bg-[#160440]">
+                        {/* Filtro de espécie */}
+                        <label>Filtro de Espécie:</label>
+                        <select onChange={(e) => setFiltroEspecie(e.target.value)} value={filtroEspecie} className="bg-[#160440]">
+                            <option value="">Todos</option>
+                            {opcoesEspecie.map(especie => (
+                                <option key={especie} value={especie}>{especie}</option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
             )}
 
-
-            {/* Lista de quantidade de itens */}
-            <select onChange={handleItensPagina} value={itens}>
-                <option value={5}>5</option>
-                <option value={10}>10</option>
-                <option value={20}>20</option>
-            </select>
-
             {/* Listagem de personagens */}
-            <ul className="grid grid-cols-3 gap-3 mt-3">
+            <ul className="grid grid-cols-3 gap-3 pt-3 bg-[#EEE419] rounded-xl p-3">
                 {exibidos.map(personagem => (
-                    <li key={personagem.id} className="p-2 bg-white rounded-xl">
+                    <li key={personagem.id} className="p-2 bg-[#160440] rounded-xl text-white">
                         <Link to={`/personagem/${personagem.id}`} className="flex flex-row gap-2">
                             <img src={personagem.image} className="w-20" />
                             <div className="flex flex-col">
-                                <p>{personagem.id}</p>
                                 <p>{personagem.name}</p>
                                 <p>{personagem.status}</p>
 
