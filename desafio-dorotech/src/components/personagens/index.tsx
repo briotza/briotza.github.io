@@ -92,7 +92,7 @@ export default function ListaPersonagens() {
 
 
     return (
-        <div>
+        <div className="h-[590px]">
             {/* Filtro de nome */}
             <input type="text" value={filtroNome} onChange={(e) => setFiltroNome(e.target.value)} className="w-[300px]" placeholder="Digite o nome do personagem" />
 
