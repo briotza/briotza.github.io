@@ -4,6 +4,7 @@ import { Personagem } from "../../types/personagens.types"
 import { Link } from "react-router-dom"
 import heart from '../../assets/heart.png'
 import skull from '../../assets/skull.png'
+import question from '../../assets/question.png'
 
 //Categorias
 const opcoesGenero = ['Male', 'Female', 'Genderless', 'unknown']
@@ -168,7 +169,7 @@ export default function ListaPersonagens() {
                                     ) : personagem.status === 'Dead' ? (
                                         <img src={skull} alt="Dead"  className="h-4 mr-1"/>
                                     ) : (
-                                        <p>a</p>
+                                        <img src={question} alt="Unknown"  className="h-4 mr-1"/>
                                     )}
                                     <p>{personagem.status}</p>
                                 </div>
