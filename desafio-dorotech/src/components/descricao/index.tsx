@@ -2,10 +2,12 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 import { DescricaoPersonagem } from "../../types/descricao.types"
+import { DetalhesModal } from '../../types/detalhes.types'
+import * as Dialog from "@radix-ui/react-dialog";
 
-export default function Descricao() {
+
+export default function Descricao({ id, onClose }: DetalhesModal) {
     const [personagem, setPersonagem] = useState<DescricaoPersonagem | null>(null)
-    const { id } = useParams<{ id: string }>()
 
     useEffect(() => {
         const fetchPersonagem = async () => {
@@ -22,21 +24,15 @@ export default function Descricao() {
     }, [id])
 
     return (
-        <div>
-            {personagem ? (
-                <>
-                    <img src={personagem.image} alt={personagem.name} />
-                    <h2>{personagem.name}</h2>
-                    <p>Status: {personagem.status}</p>
-                    <p>Espécie: {personagem.species}</p>
-                    <p>Gênero: {personagem.gender}</p>
-                    <p>Origem: {personagem.origin.name}</p>
-                    <p>Localização: {personagem.location.name}</p>
-                </>
-            ) : (
-                <p>Carregando personagem...</p>
-            )}
-        </div>
-
+        <Dialog.Root open={!!id} onOpenChange={() => onClose()}>
+            <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
+            <Dialog.Content className="fixed bg-white p-4 rounded-lg shadow-lg max-w-md mx-auto inset-0 m-auto">
+                <Dialog.Title>Teste</Dialog.Title>
+                <Dialog.Description />
+                <Dialog.Close asChild>
+                    <button onClick={onClose} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">Fechar</button>
+                </Dialog.Close>
+            </Dialog.Content>
+        </Dialog.Root>
     )
 }
