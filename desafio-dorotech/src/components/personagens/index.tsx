@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import heart from '../../assets/heart.png'
 import skull from '../../assets/skull.png'
 import question from '../../assets/question.png'
+import Descricao from "../descricao"
 
 //Categorias
 const opcoesGenero = ['Male', 'Female', 'Genderless', 'unknown']
@@ -18,6 +19,7 @@ export default function ListaPersonagens() {
     const [totalPersonagens, setTotalPersonagens] = useState<number>(0)
     const [pagina, setPagina] = useState<number>(1)
     const [visivel, setVisivel] = useState<boolean>(false)
+    const [idModal, setIdModal] = useState<string | null>(null)
 
     //Armazenar filtros
     const [filtroGenero, setFiltroGenero] = useState<string>('')
@@ -157,7 +159,7 @@ export default function ListaPersonagens() {
             <ul className="grid grid-cols-3 gap-3 pt-3 bg-[#62A3AB] rounded-b-xl p-3 bg-opacity-60">
                 {exibidos.map(personagem => (
                     <li key={personagem.id} className="p-2 bg-[#24325f] rounded-xl text-white">
-                        <Link to={`/personagem/${personagem.id}`} className="flex flex-row gap-2">
+                        <button onClick={() => setIdModal(personagem.id.toString())} className="flex flex-row gap-2">
                             <img src={personagem.image} className="w-20" />
                             <div className="flex flex-col">
                                     <p className="font-bold">{personagem.name}</p>
@@ -173,10 +175,14 @@ export default function ListaPersonagens() {
                                 </div>
                             </div>
 
-                        </Link>
+                        </button>
                     </li>
                 ))}
             </ul>
+
+            {idModal && (
+                <Descricao id={idModal} onClose={() => setIdModal(null)} />
+            )}
 
             {/* Navegação entre páginas */}
             <div className="flex mt-2">
