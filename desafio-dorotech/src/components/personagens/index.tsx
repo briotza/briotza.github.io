@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 import { Personagem } from "../../types/personagens.types"
-import { Link } from "react-router-dom"
 import heart from '../../assets/heart.png'
 import skull from '../../assets/skull.png'
 import question from '../../assets/question.png'
@@ -13,10 +12,9 @@ const opcoesStatus = ['Alive', 'Dead', 'unknown']
 const opcoesEspecie = ['Human', 'Alien', 'Robot', 'unknown', 'Other']
 
 export default function ListaPersonagens() {
-    //Armazenar lista de personagens, quantidade de itens, total de personagens, páginas, visibilidade dos filtros, personagem do modal e personagens filtrados
+    //Armazenar lista de personagens, quantidade de itens, páginas, visibilidade dos filtros, personagem do modal e personagens filtrados
     const [personagens, setPersonagens] = useState<Personagem[]>([])
     const [itens, setItens] = useState<number>(20)
-    const [totalPersonagens, setTotalPersonagens] = useState<number>(0)
     const [pagina, setPagina] = useState<number>(1)
     const [visivel, setVisivel] = useState<boolean>(false)
     const [idModal, setIdModal] = useState<string | null>(null)
@@ -46,7 +44,6 @@ export default function ListaPersonagens() {
                 }
             }
             setPersonagens(todos)
-            setTotalPersonagens(todos.length)
             setPersonagensFiltrados(todos)
 
         } catch (error) {
