@@ -160,8 +160,7 @@ export default function ListaPersonagens() {
             {/* Listagem de personagens */}
             <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 pt-3 bg-[#62A3AB] rounded-b-xl p-3 bg-opacity-60">
                 {exibidos.map(personagem => (
-                    <li key={personagem.id} className="p-2 bg-[#24325f] rounded-xl text-white">
-                        <button onClick={() => setIdModal(personagem.id.toString())} className="flex flex-row gap-2">
+                    <li key={personagem.id} onClick={() => setIdModal(personagem.id.toString())} className="flex flex-row cursor-pointer gap-2 p-2 bg-[#24325f] rounded-xl text-white">
                             <img src={personagem.image} className="w-20" />
                             <div className="flex flex-col">
                                 <p className="font-bold">{personagem.name}</p>
@@ -176,8 +175,6 @@ export default function ListaPersonagens() {
                                     <p>{personagem.status}</p>
                                 </div>
                             </div>
-
-                        </button>
                     </li>
                 ))}
             </ul>
