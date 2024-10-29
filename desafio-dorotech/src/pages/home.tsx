@@ -1,6 +1,4 @@
 import ListaPersonagens from "../components/personagens";
-import logo from '../assets/logo.png'
-import portal from '../assets/green-portal.png'
 import morty from '../assets/morty.png'
 import rick from '../assets/rick.png'
 
@@ -15,7 +13,6 @@ export default function Home() {
             <div className="p-3 my-2">
                 <ListaPersonagens />
             </div>
-            {/*<img src={portal} className="w-[800px]" />*/}
         </div>
     )
 }

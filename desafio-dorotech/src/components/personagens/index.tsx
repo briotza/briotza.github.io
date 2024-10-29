@@ -13,22 +13,20 @@ const opcoesStatus = ['Alive', 'Dead', 'unknown']
 const opcoesEspecie = ['Human', 'Alien', 'Robot', 'unknown', 'Other']
 
 export default function ListaPersonagens() {
-    //Armazenar lista de personagens, quantidade de itens, total de personagens e páginas
+    //Armazenar lista de personagens, quantidade de itens, total de personagens, páginas, visibilidade dos filtros, personagem do modal e personagens filtrados
     const [personagens, setPersonagens] = useState<Personagem[]>([])
     const [itens, setItens] = useState<number>(20)
     const [totalPersonagens, setTotalPersonagens] = useState<number>(0)
     const [pagina, setPagina] = useState<number>(1)
     const [visivel, setVisivel] = useState<boolean>(false)
     const [idModal, setIdModal] = useState<string | null>(null)
+    const [personagensFiltrados, setPersonagensFiltrados] = useState<Personagem[]>([])
 
     //Armazenar filtros
     const [filtroGenero, setFiltroGenero] = useState<string>('')
     const [filtroStatus, setFiltroStatus] = useState<string>('')
     const [filtroEspecie, setFiltroEspecie] = useState<string>('')
     const [filtroNome, setFiltroNome] = useState<string>('')
-
-    const [personagensFiltrados, setPersonagensFiltrados] = useState<Personagem[]>([])
-
 
     const fetchPersonagens = async () => {
         try {
@@ -98,23 +96,23 @@ export default function ListaPersonagens() {
         }
     }
 
+    //Mostrar e ocultar filtros
     const alternaVisibilidade = () => {
         setVisivel((prev) => !prev)
     }
 
     return (
         <div className="h-[100%] font-sans text-white w-[290px] sm:w-[550px] md:w-[600px] lg:w-[977px] pt-6">
-            {/* Filtro de nome */}
             <div className="flex flex-col sm:flex-row lg:items-center bg-[#913E86] p-3 rounded-t-xl bg-opacity-60">
+                {/* Filtro de nome e botão de busca*/}
                 <div className="flex flex-col sm:flex-row">
-                <input type="text" value={filtroNome} onChange={(e) => setFiltroNome(e.target.value)} className="w-[100%] sm:w-[280px] md:w-[300px] lg:w-[700px] p-3 rounded-xl text-black" placeholder="Digite o nome do personagem" />
-                <button onClick={aplicarFiltro} className="sm:ml-4 ml-0 my-2 sm:my-0 border p-2 rounded-xl">Buscar</button>
+                    <input type="text" value={filtroNome} onChange={(e) => setFiltroNome(e.target.value)} className="w-[100%] sm:w-[280px] md:w-[300px] lg:w-[700px] p-3 rounded-xl text-black" placeholder="Digite o nome do personagem" />
+                    <button onClick={aplicarFiltro} className="sm:ml-4 ml-0 my-2 sm:my-0 border p-2 rounded-xl">Buscar</button>
                 </div>
-               
+                {/* Botão de filtros e quantidade de itens*/}
                 <div className="flex flex-col sm:flex-row ml-0 gap-0 sm:ml-auto sm:gap-3 items-center justify-items-center">
                     <button className="bg-none border p-2 rounded-xl" onClick={alternaVisibilidade}>{visivel ? 'Filtros' : 'Filtros'}</button>
                     <div className="">
-                        {/* Lista de quantidade de itens */}
                         <select onChange={handleItensPagina} value={itens} className="bg-[#913E86] mt-3 sm:mt-0">
                             <option value={5}>5</option>
                             <option value={10}>10</option>
@@ -169,14 +167,14 @@ export default function ListaPersonagens() {
                         <button onClick={() => setIdModal(personagem.id.toString())} className="flex flex-row gap-2">
                             <img src={personagem.image} className="w-20" />
                             <div className="flex flex-col">
-                                    <p className="font-bold">{personagem.name}</p>
+                                <p className="font-bold">{personagem.name}</p>
                                 <div className="flex items-center">
                                     {personagem.status === 'Alive' ? (
                                         <img src={heart} alt="Alive" className="h-4 mr-1" />
                                     ) : personagem.status === 'Dead' ? (
-                                        <img src={skull} alt="Dead"  className="h-4 mr-1"/>
+                                        <img src={skull} alt="Dead" className="h-4 mr-1" />
                                     ) : (
-                                        <img src={question} alt="Unknown"  className="h-4 mr-1"/>
+                                        <img src={question} alt="Unknown" className="h-4 mr-1" />
                                     )}
                                     <p>{personagem.status}</p>
                                 </div>
@@ -186,7 +184,8 @@ export default function ListaPersonagens() {
                     </li>
                 ))}
             </ul>
-
+            
+            {/* Chamar modal */}
             {idModal && (
                 <Descricao id={idModal} onClose={() => setIdModal(null)} />
             )}

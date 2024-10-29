@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
 import axios from "axios"
 import { DescricaoPersonagem } from "../../types/descricao.types"
 import { DetalhesModal } from '../../types/detalhes.types'
@@ -12,6 +11,7 @@ export default function Descricao({ id, onClose }: DetalhesModal) {
     useEffect(() => {
         const fetchPersonagem = async () => {
             try {
+                //Requisição GET para API por id
                 const resposta = await axios.get(`https://rickandmortyapi.com/api/character/${id}`)
                 setPersonagem(resposta.data)
             } catch (error) {
@@ -19,12 +19,12 @@ export default function Descricao({ id, onClose }: DetalhesModal) {
             }
 
         }
-
         fetchPersonagem()
     }, [id])
 
     return (
         <Dialog.Root open={!!id} onOpenChange={() => onClose()}>
+            {/*Modal para descrição de personagem*/}
             <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
             <Dialog.Content className="fixed bg-black p-5 rounded-lg shadow-lg max-w-2xl inset-0 m-auto text-xl text-white h-[400px] flex flex-col">
                 <Dialog.Title className="mb-2 text-2xl">{personagem?.name}</Dialog.Title>
