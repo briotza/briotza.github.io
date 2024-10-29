@@ -103,16 +103,19 @@ export default function ListaPersonagens() {
     }
 
     return (
-        <div className="h-[100%] font-sans text-white w-[977px] pt-6">
+        <div className="h-[100%] font-sans text-white w-[290px] sm:w-[550px] md:w-[600px] lg:w-[977px] pt-6">
             {/* Filtro de nome */}
-            <div className="flex items-center bg-[#913E86] p-3 rounded-t-xl bg-opacity-60">
-                <input type="text" value={filtroNome} onChange={(e) => setFiltroNome(e.target.value)} className="w-[700px] p-3 rounded-xl text-black" placeholder="Digite o nome do personagem" />
-                <button onClick={aplicarFiltro} className="ml-4">Buscar</button>
-                <div className="flex flex-row ml-auto gap-3">
-                    <button className="bg-none" onClick={alternaVisibilidade}>{visivel ? 'Filtros' : 'Filtros'}</button>
+            <div className="flex flex-col sm:flex-row lg:items-center bg-[#913E86] p-3 rounded-t-xl bg-opacity-60">
+                <div className="flex flex-col sm:flex-row">
+                <input type="text" value={filtroNome} onChange={(e) => setFiltroNome(e.target.value)} className="w-[100%] sm:w-[280px] md:w-[300px] lg:w-[700px] p-3 rounded-xl text-black" placeholder="Digite o nome do personagem" />
+                <button onClick={aplicarFiltro} className="sm:ml-4 ml-0 my-2 sm:my-0 border p-2 rounded-xl">Buscar</button>
+                </div>
+               
+                <div className="flex flex-col sm:flex-row ml-0 gap-0 sm:ml-auto sm:gap-3 items-center justify-items-center">
+                    <button className="bg-none border p-2 rounded-xl" onClick={alternaVisibilidade}>{visivel ? 'Filtros' : 'Filtros'}</button>
                     <div className="">
                         {/* Lista de quantidade de itens */}
-                        <select onChange={handleItensPagina} value={itens} className="bg-[#913E86]">
+                        <select onChange={handleItensPagina} value={itens} className="bg-[#913E86] mt-3 sm:mt-0">
                             <option value={5}>5</option>
                             <option value={10}>10</option>
                             <option value={20}>20</option>
@@ -123,7 +126,7 @@ export default function ListaPersonagens() {
 
 
             {visivel && (
-                <div className="py-3 flex gap-6 bg-[#913E86] bg-opacity-60 justify-center">
+                <div className="py-3 flex lg:flex-row sm: flex-col gap-6 bg-[#913E86] bg-opacity-60 justify-center">
                     {/* Filtro de gênero */}
                     <div className="bg-[#913E86] bg-opacity-60">
                         <label className="p-3">Filtro de Gênero:</label>
@@ -160,7 +163,7 @@ export default function ListaPersonagens() {
             )}
 
             {/* Listagem de personagens */}
-            <ul className="grid grid-cols-3 gap-3 pt-3 bg-[#62A3AB] rounded-b-xl p-3 bg-opacity-60">
+            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 pt-3 bg-[#62A3AB] rounded-b-xl p-3 bg-opacity-60">
                 {exibidos.map(personagem => (
                     <li key={personagem.id} className="p-2 bg-[#24325f] rounded-xl text-white">
                         <button onClick={() => setIdModal(personagem.id.toString())} className="flex flex-row gap-2">
