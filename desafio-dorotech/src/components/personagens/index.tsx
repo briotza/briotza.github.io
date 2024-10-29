@@ -27,6 +27,8 @@ export default function ListaPersonagens() {
     const [filtroEspecie, setFiltroEspecie] = useState<string>('')
     const [filtroNome, setFiltroNome] = useState<string>('')
 
+    const [personagensFiltrados, setPersonagensFiltrados] = useState<Personagem[]>([])
+
 
     const fetchPersonagens = async () => {
         try {
@@ -47,6 +49,7 @@ export default function ListaPersonagens() {
             }
             setPersonagens(todos)
             setTotalPersonagens(todos.length)
+            setPersonagensFiltrados(todos)
 
         } catch (error) {
             console.log('Não foi possível carregar a lista:'), error
@@ -65,17 +68,17 @@ export default function ListaPersonagens() {
     }
 
     //Lógica de filtragem
-    const filtrarPersonagens = () => {
-        return personagens.filter(personagem => {
+    const aplicarFiltro = () => {
+        const filtrados = personagens.filter(personagem => {
             const generoMatch = filtroGenero ? personagem.gender === filtroGenero : true
             const statusMatch = filtroStatus ? personagem.status === filtroStatus : true
             const especieMatch = filtroEspecie ? personagem.species === filtroEspecie : true
             const nomeMatch = filtroNome ? personagem.name.toLowerCase().includes(filtroNome.toLowerCase()) : true
             return nomeMatch && generoMatch && statusMatch && especieMatch
         });
+        setPersonagensFiltrados(filtrados)
+        setPagina(1)
     }
-
-    const personagensFiltrados = filtrarPersonagens();
 
 
     //Lógica para exibição de personagens
@@ -104,6 +107,7 @@ export default function ListaPersonagens() {
             {/* Filtro de nome */}
             <div className="flex items-center bg-[#913E86] p-3 rounded-t-xl bg-opacity-60">
                 <input type="text" value={filtroNome} onChange={(e) => setFiltroNome(e.target.value)} className="w-[700px] p-3 rounded-xl text-black" placeholder="Digite o nome do personagem" />
+                <button onClick={aplicarFiltro} className="ml-4">Buscar</button>
                 <div className="flex flex-row ml-auto gap-3">
                     <button className="bg-none" onClick={alternaVisibilidade}>{visivel ? 'Filtros' : 'Filtros'}</button>
                     <div className="">
