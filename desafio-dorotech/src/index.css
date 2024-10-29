@@ -5,13 +5,19 @@
 
 .text-outline {
     text-shadow: 
-      -1px -1px 0 #ffffffc7,  
-      1px -1px 0 #ffffffc7,
-      -1px 1px 0 #ffffffc7,
-      1px 1px 0 #ffffffc7;
+      -1px -1px 0 #C2DF51,  
+      1px -1px 0 #C2DF51,
+      -1px 1px 0 #C2DF51,
+      1px 1px 0 #C2DF51;
   }
 
   .custom-bg {
     background: linear-gradient(to bottom, #8EDC23, #000113);
   }
   
+  @font-face {
+    font-family: 'show';
+    src: url('./assets/fonts/get_schwifty.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }

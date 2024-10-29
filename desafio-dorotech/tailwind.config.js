@@ -14,6 +14,7 @@ export default {
         creepster: ['Creepster', 'cursive'],
         inter: ['Inter', 'sans-serif'],
         sans: ['Montserrat', 'sans-serif'],
+        custom: ['show', 'sans-serif']
       },
     },
   },
